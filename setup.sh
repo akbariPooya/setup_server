@@ -32,7 +32,12 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 sudo docker --version
 
+sudo mkdir -p ~/.docker/cli-plugins
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+sudo chmod +x ~/.docker/cli-plugins/docker-compose
+
 echo "Install Docker is done."
+
 
 echo "Set mirror for docker..."
 
