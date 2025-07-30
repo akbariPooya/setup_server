@@ -98,6 +98,10 @@ echo "Install GitHub CLI..."
 # sudo apt-get update -y
 sudo apt-get install -y gh
 
+echo "Install Make"
+
+sudo apt-get install make
+
 echo "Installation and control were successful."
 
 echo "To apply the docker group changes, log out and log back in or run the following command:"
