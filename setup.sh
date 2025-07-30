@@ -16,7 +16,7 @@ echo "Install Docker..."
 sudo apt-get remove -y docker docker-engine docker.io containerd runc || true
 
 # Install prerequisite
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install -y ca-certificates curl gnupg lsb-release software-properties-common
 
 # Add GPG key of Docker
@@ -28,7 +28,6 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install and update Docker Engine
-sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 sudo docker --version
@@ -87,11 +86,11 @@ sudo apt-get install -y git
 echo "Install GitHub CLI..."
 
 # Add GitHub CLI resource
-type -p curl >/dev/null || sudo apt-get install curl -y
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt-get update
+# type -p curl >/dev/null || sudo apt-get install curl -y
+# curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+# sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+# sudo apt-get update -y
 sudo apt-get install -y gh
 
 echo "Installation and control were successful."
