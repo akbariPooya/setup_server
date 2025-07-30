@@ -3,7 +3,14 @@ set -e
 
 echo "Start install and setting..."
 
-echo "Install Docker and setting mirror"
+echo "Setup shekan DNS..."
+
+# Set DNS shekan
+sudo bash -c 'echo -e "nameserver 178.22.122.100\nnameserver 185.51.200.2" > /etc/resolv.conf'
+
+echo "shekan DNS is set."
+
+echo "Install Docker..."
 
 # Remove last docker
 sudo apt-get remove -y docker docker-engine docker.io containerd runc || true
@@ -24,13 +31,20 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
+sudo docker --version
+
+echo "Install Docker is done."
+
+echo "Set mirror for docker..."
+
 # Setting Mirror for Docker (example: https://registry.docker-cn.com)
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json > /dev/null <<EOF
 {
-  "registry-mirrors": ["https://registry.docker-cn.com"]
+  "registry-mirrors": ["https://registry.docker-cn.com", "https://docker.iranserver.com", "https://docker.haiocloud.com", "https://docker.arvancloud.ir"]
 }
 EOF
+
 
 # Restart Docker service
 sudo systemctl daemon-reload
@@ -39,7 +53,7 @@ sudo systemctl restart docker
 # Add current user in docker group
 sudo usermod -aG docker $USER
 
-echo "The Docker is Install and Mirror is set."
+echo "Set mirror for docker is done."
 
 # Install Portainer
 echo "Install Portainer..."
@@ -50,6 +64,11 @@ sudo docker rm -f portainer || true
 # Download and run Portainer(last version)
 sudo docker volume create portainer_data
 
+echo "Install Protainer is done."
+
+echo "Running Protainer..."
+
+
 sudo docker run -d -p 9000:9000 \
   --name=portainer \
   --restart=always \
@@ -58,7 +77,7 @@ sudo docker run -d -p 9000:9000 \
   portainer/portainer-ce:latest
 
 
-echo "The Portainer is install and run."
+echo "The Portainer is run."
 
 # Install Git
 echo "Install Git..."
